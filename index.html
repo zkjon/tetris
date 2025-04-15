@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -7,18 +7,19 @@
     <title>Tetris - Using Vanilla Javascript</title>
   </head>
   <body>
-
     <header class="flex justify-center p-5">
-      <h1 class="text-7xl text-white">zkjon's tetris</h1>
+      <h1 class="text-4xl text-white text-center">zkjon's tetris</h1>
     </header>
 
     <main>
-      <canvas>
+      <canvas class="border-8 border-black rounded-2xl shadow-lg">
         <!-- here game will render -->
       </canvas>
-      <strong class="text-white text-2xl">Score: <span id="score">0</span></strong>
+      <strong class="text-white text-2xl"
+        >Score: <span id="score">0</span></strong
+      >
     </main>
-    
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
