@@ -5,7 +5,7 @@ import { PIECES } from "./consts/pieces";
 const canvas = document.querySelector("canvas");
 const context = canvas.getContext("2d");
 
-const BLOCK_SIZE = 20;
+let BLOCK_SIZE = window.innerWidth < 600 ? 18 : 35; // block size
 const MAP_WIDTH = 10;
 const MAP_HEIGHT = 20;
 
@@ -13,6 +13,14 @@ canvas.width = BLOCK_SIZE * MAP_WIDTH;
 canvas.height = BLOCK_SIZE * MAP_HEIGHT;
 
 context.scale(BLOCK_SIZE, BLOCK_SIZE);
+
+window.addEventListener("resize", () => {
+  BLOCK_SIZE = window.innerWidth < 600 ? 18 : 35; // block size
+  canvas.width = BLOCK_SIZE * MAP_WIDTH;
+  canvas.height = BLOCK_SIZE * MAP_HEIGHT;
+  context.scale(BLOCK_SIZE, BLOCK_SIZE);
+}
+);
 
 // 3. create map, will compose of 20 rows and 10 columns using 0 and 1
 const map = [
