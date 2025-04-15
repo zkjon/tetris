@@ -16,33 +16,14 @@ context.scale(BLOCK_SIZE, BLOCK_SIZE);
 
 // 3. create map, will compose of 20 rows and 10 columns using 0 and 1
 const map = [
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [1, 1, 1, 1, 1, 0, 0, 1, 1, 1],
+
 ];
-// for (let i = 0; i < MAP_HEIGHT; i++) {
-//     map[i] = []
-//     for (let j = 0; j < MAP_WIDTH; j++) {
-//         map[i][j] = 0
-//     }
-// }
+for (let i = 0; i < MAP_HEIGHT; i++) {
+    map[i] = []
+    for (let j = 0; j < MAP_WIDTH; j++) {
+        map[i][j] = 0
+    }
+}
 
 // 4. create piece && random initial piece on randon x position
 const piece = {
@@ -52,6 +33,11 @@ const piece = {
     y: 0,
   },
 };
+
+// 9. score
+let score = 0;
+const scoreElement = document.querySelector("#score");
+scoreElement.innerHTML = score;
 
 // 2. game update
 let countDown = 0;
@@ -141,12 +127,16 @@ function fixPiece() {
 
 // 8. clear lines
 function clearLines() {
+  let linesToClear = 0;
   map.forEach((row, y) => {
     if (row.every((cell) => cell !== 0)) {
       map.splice(y, 1); // remove the row
       map.unshift(Array(MAP_WIDTH).fill(0)); // add a new row at the top
+      linesToClear++; // increment lines to clear
     }
   });
+  score += linesToClear ** 2; // increment score this algorithm is 1, 4, 9 or 16
+  scoreElement.innerHTML = score; // update score
 }
 
 // 5. keydown event
