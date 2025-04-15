@@ -1,33 +1,32 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @theme {
-    --font-family: monospace, sans-serif;
-    --font-size: 16px;
-    --line-height: 1.5;
-    
-    --color-white: #e0e0e0;
-    --color-primary: #3b3b32;
+  --font-family: monospace, sans-serif;
+  --font-size: 16px;
+  --line-height: 1.5;
 
-    /* Tetris colors pieces */
-    --color-piece-o: #ff00005d;
-    --color-piece-i: #00ff005d;
-    --color-piece-t: #0000ff5d;
-    --color-piece-s: #ff00ff5d;
-    --color-piece-z: #00ffff5d;
-    --color-piece-l: #ffff005d;
-    --color-piece-j: #ff7f005d;
+  --color-white: #e0e0e0;
+  --color-primary: #3b3b32;
+
+  /* Tetris colors pieces */
+  /* --color-piece-o: #ff00005d; */
+  /* --color-piece-i: #00ff005d; */
+  /* --color-piece-t: #0000ff5d; */
+  /* --color-piece-s: #ff00ff5d; */
+  /* --color-piece-z: #00ffff5d; */
+  /* --color-piece-l: #ffff005d; */
+  /* --color-piece-j: #ff7f005d; */
 }
 html {
-    font-size: var(--font-size);
+  font-size: var(--font-size);
 }
 body {
-    font-family: var(--font-family);
-    background-color: var(--color-primary);
-    @apply bg-[radial-gradient(circle,_gray_1px,_transparent_1px)] bg-[length:1em_1em] bg-[position:0_0];
-
-    margin: 0;
-    padding: 0;
-    display: grid;
-    place-content: center;
-    place-items: center;
+  font-family: var(--font-family);
+  background-color: var(--color-primary);
+  @apply bg-[radial-gradient(circle,_gray_1px,_transparent_1px)] bg-[length:1em_1em] bg-[position:0_0];
+  margin: 0;
+  padding: 0;
+  display: grid;
+  place-content: center;
+  place-items: center;
 }
