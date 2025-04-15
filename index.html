@@ -15,13 +15,20 @@
       <canvas class="border-8 border-black rounded-2xl shadow-lg">
         <!-- here game will render -->
       </canvas>
-      <strong class="text-white text-2xl"
-        >Score: <span id="score">0</span></strong
-      >
+      <div class="flex flex-col sm:flex-row justify-between items-center w-full">
+        <strong class="text-white text-2xl"
+          >Score: <span id="score">0</span></strong
+        >
+        <strong class="text-white text-md"
+          >Press "P" to pause</strong
+        >
+      </div>
     </main>
 
-    <footer class="flex flex-col justify-end w-screen text-[2vh] ">
-      <strong class="text-white bg-black w-fit mx-auto px-2 py-1">&copy; 2023 zkjon</strong>
+    <footer class="flex flex-col justify-end w-screen text-[2vh]">
+      <strong class="text-white bg-black w-fit mx-auto px-2 py-1"
+        >&copy; 2023 zkjon</strong
+      >
     </footer>
     <script type="module" src="/src/main.js"></script>
   </body>
