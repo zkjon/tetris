@@ -1,3 +1,4 @@
+![Status](https://img.shields.io/badge/status-in%20development-yellow) ![Project Status](https://img.shields.io/badge/project-active--development-yellow) ![Work in Progress](https://img.shields.io/badge/work%20in%20progress-yes-orange)
 
 <p align="center">
   <img src="./public/icon.avif" alt="Tetris Banner" />
