@@ -1,4 +1,10 @@
-# Tetris - Vanilla JavaScript
+
+<p align="center">
+  <img src="./public/icon.avif" alt="Tetris Banner" />
+</p>
+<h2 align="center">by zkjon</h2>
+
+# Tetris - Vanilla JavaScript 
 
 A simple and responsive Tetris game built with modern web technologies.
 
