@@ -44,35 +44,42 @@ const map = [
 //     }
 // }
 
+
+// 4. create piece && random initial piece on randon x position
+const piece = {
+  shape: PIECES[Math.floor(Math.random() * PIECES.length)], // random initial piece
+  position: {
+    x: Math.floor(Math.random() * (MAP_WIDTH - 4)), // random x position
+    y: 0,
+  },
+
+};
+
 // 2. game update
 let countDown = 0;
 let previousTime = 0;
 let interval = 1000; // 1 second
 function loop(time = 0) {
-  let thisTime = time - previousTime;
+  let thisTime = time - previousTime; // time since last frame
 
-  countDown += thisTime;
+  countDown += thisTime; // add time since last frame to countdown
 
   if (countDown > interval) {
-    piece.position.y++;
+    piece.position.y++; // move piece down
     if (checkCollision()) {
-      piece.position.y--;
-      fixPiece();
-      clearLines();
+      piece.position.y--; // if there is a collision, move piece back up
+      fixPiece(); // fix piece to map
+      clearLines(); // clear lines if is full
     }
+    countDown = 0 // reset countdown
   }
 
-  countDown = 0
-
+  previousTime = time;  // update previous time
   print();
   window.requestAnimationFrame(loop);
 }
 
-// 4. create piece
-const piece = {
-  position: { x: 5, y: 5 },
-  shape: PIECES[0],
-};
+
 
 // 2.1. print map
 function print() {
@@ -83,13 +90,13 @@ function print() {
   map.forEach((row, i) => {
     row.forEach((cell, j) => {
       if (cell === 1) {
-        context.fillStyle = "#fff";
-        context.fillRect(j, i, 1, 1);
+        context.fillStyle = "#fff"; // white color
+        context.fillRect(j, i, 1, 1); // draw a cell
 
         // border of the cell
-        context.strokeStyle = "#000";
-        context.lineWidth = 0.1;
-        context.strokeRect(j, i, 1, 1);
+        context.strokeStyle = "#000"; // black color
+        context.lineWidth = 0.1; // border width
+        context.strokeRect(j, i, 1, 1); // draw a border
       }
     });
   });
@@ -97,12 +104,12 @@ function print() {
   piece.shape.forEach((row, y) => {
     row.forEach((cell, x) => {
       if (cell) {
-        context.fillStyle = "#f00";
-        context.fillRect(x + piece.position.x, y + piece.position.y, 1, 1);
+        context.fillStyle = "#f00"; // red color
+        context.fillRect(x + piece.position.x, y + piece.position.y, 1, 1); // draw a cell
         // border of the cell
         context.strokeStyle = "#000";
         context.lineWidth = 0.1;
-        context.strokeRect(x + piece.position.x, y + piece.position.y, 1, 1);
+        context.strokeRect(x + piece.position.x, y + piece.position.y, 1, 1); // draw a border
       }
     });
   });
@@ -114,7 +121,7 @@ function checkCollision() {
     return row.find((cell, x) => {
       return (
         cell !== 0 && // if the cell is not empty
-        map[y + piece.position.y]?.[x + piece.position.x] !== 0
+        map[y + piece.position.y]?.[x + piece.position.x] !== 0 
       ); // if the cell is not out of bounds
     });
   });
@@ -131,7 +138,9 @@ function fixPiece() {
   });
 
   piece.position.y = 0;
-  piece.position.x = 0;
+  piece.position.x = Math.floor(Math.random() * (MAP_WIDTH - 4)); // random x position
+
+  piece.shape = PIECES[Math.floor(Math.random() * PIECES.length)]; // random piece
 }
 
 // 8. clear lines
