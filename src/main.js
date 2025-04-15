@@ -44,7 +44,6 @@ const map = [
 //     }
 // }
 
-
 // 4. create piece && random initial piece on randon x position
 const piece = {
   shape: PIECES[Math.floor(Math.random() * PIECES.length)], // random initial piece
@@ -52,7 +51,6 @@ const piece = {
     x: Math.floor(Math.random() * (MAP_WIDTH - 4)), // random x position
     y: 0,
   },
-
 };
 
 // 2. game update
@@ -71,15 +69,13 @@ function loop(time = 0) {
       fixPiece(); // fix piece to map
       clearLines(); // clear lines if is full
     }
-    countDown = 0 // reset countdown
+    countDown = 0; // reset countdown
   }
 
-  previousTime = time;  // update previous time
+  previousTime = time; // update previous time
   print();
   window.requestAnimationFrame(loop);
 }
-
-
 
 // 2.1. print map
 function print() {
@@ -121,7 +117,7 @@ function checkCollision() {
     return row.find((cell, x) => {
       return (
         cell !== 0 && // if the cell is not empty
-        map[y + piece.position.y]?.[x + piece.position.x] !== 0 
+        map[y + piece.position.y]?.[x + piece.position.x] !== 0
       ); // if the cell is not out of bounds
     });
   });
@@ -155,25 +151,42 @@ function clearLines() {
 
 // 5. keydown event
 document.addEventListener("keydown", (event) => {
-  if (event.key === "ArrowLeft") {
+  // move left
+  if (event.key === "ArrowLeft" || event.key === "a" || event.key === "A") {
     piece.position.x--;
     if (checkCollision()) {
       piece.position.x++;
     }
   }
-  if (event.key === "ArrowRight") {
+
+  // move right
+  if (event.key === "ArrowRight" || event.key === "d" || event.key === "D") {
     piece.position.x++;
     if (checkCollision()) {
       piece.position.x--;
     }
   }
 
-  if (event.key === "ArrowDown") {
+  // move down
+  if (event.key === "ArrowDown" || event.key === "s" || event.key === "S") {
     piece.position.y++;
     if (checkCollision()) {
       piece.position.y--;
       fixPiece();
       clearLines();
+    }
+  }
+
+  // rotate piece clockwise
+  if (event.key === "ArrowUp" || event.key === "w" || event.key === "W") {
+    const rotatedShape = piece.shape[0].map((_, index) =>
+      piece.shape.map((row) => row[index]).reverse()
+    ); // rotate piece 90 degrees clockwise
+    const originalShape = piece.shape; // store original shape for collision check
+    piece.shape = rotatedShape; // rotate piece
+
+    if (checkCollision()) {
+      piece.shape = originalShape; // revert to original shape
     }
   }
 });
